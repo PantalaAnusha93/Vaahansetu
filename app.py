@@ -51,10 +51,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # MySQL Database Configuration
 db_config = {
-    'host': "localhost",
-    'user': "root",
-    'password': "Anusha@123",
-    'database': "vaahansetu"
+    'host': "vaahansetu-server.mysql.database.azure.com",
+    'user': "uhlqbffcoz",
+    'password': "s$MlAt8YswB23CT1",
+    'database': "vahansetu-database",
+    'port': 3306,
+    'ssl_ca': "MysqlflexGlobalRootCA.crt.pem"
 }
 
 # --- Initialization ---
@@ -72,7 +74,7 @@ def get_db_connection():
         print(f"Error connecting to MySQL Database: {e}")
         return None
     
-def create_database_if_not_exists():
+'''def create_database_if_not_exists():
     """
     Connects to MySQL server without a specific database 
     and creates the 'vaahansetu' database if it doesn't exist.
@@ -96,7 +98,7 @@ def create_database_if_not_exists():
         conn.close()
         
     except Error as e:
-        print(f"Error creating database: {e}")
+        print(f"Error creating database: {e}")'''
     
 
 # ADD THIS DECORATOR FOR ADMIN SECURITY
@@ -4706,6 +4708,6 @@ def confirm_upi_payment(trip_id):
     return redirect(url_for('my_bookings'))
 # Change the bottom of your file to:
 if __name__ == '__main__':
-    create_database_if_not_exists()
+    #create_database_if_not_exists()
     create_tables()
     socketio.run(app, debug=True)
