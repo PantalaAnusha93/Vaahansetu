@@ -56,7 +56,7 @@ db_config = {
     'password': "Anusha@123",
     'database': "vahansetu",
     'port': 3306,
-    #'ssl_ca': "MysqlflexGlobalRootCA.crt.pem"
+    'ssl_ca': "MysqlflexGlobalRootCA.crt.pem"
 }
 
 # --- Initialization ---
