@@ -54,7 +54,7 @@ db_config = {
     'host': "vahansetu-server.mysql.database.azure.com",
     'user': "uhlqbffcoz",
     'password': "Anusha@123",
-    'database': "vahansetu-database",
+    'database': "vahansetu",
     'port': 3306,
     #'ssl_ca': "MysqlflexGlobalRootCA.crt.pem"
 }
