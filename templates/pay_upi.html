@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment | VaahanSetu</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary: #dc2626;
+            --success: #10b981;
+            --surface: #ffffff;
+            --bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 2rem;
+            background-image: radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .checkout-wrapper { width: 100%; max-width: 420px; }
+        .brand-header { text-align: center; margin-bottom: 1.5rem; }
+        .brand-header img { height: 45px; width: auto; margin-bottom: 5px; }
+
+        .card {
+            background: var(--surface);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-banner {
+            background: #0f172a; color: white; padding: 2rem 2rem 1.5rem; text-align: center; position: relative;
+        }
+        .card-banner::after {
+            content: ''; position: absolute; bottom: -15px; left: 0; right: 0; height: 30px;
+            background: var(--surface); border-radius: 24px 24px 0 0;
+        }
+
+        .amount-display { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; }
+        .amount-label { font-size: 0.85rem; color: #94a3b8; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+        .card-body { padding: 1rem 2rem 2.5rem; text-align: center; }
+
+        /* --- QR Scanner Animation --- */
+        .qr-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .qr-box {
+            background: white; padding: 15px; border-radius: 16px; border: 2px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            position: relative; overflow: hidden;
+        }
+        
+        .qr-box img { max-width: 200px; height: auto; border-radius: 8px; display: block; position: relative; z-index: 1;}
+        
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: rgba(34, 197, 94, 0.8);
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.6), 0 0 20px rgba(34, 197, 94, 0.4);
+            z-index: 2;
+            animation: scan 2.5s infinite linear;
+            border-radius: 50%;
+        }
+
+        @keyframes scan {
+            0% { top: 5%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 95%; opacity: 0; }
+        }
+
+        /* --- Supported UPI Apps --- */
+        .supported-apps {
+            margin-bottom: 2rem;
+        }
+        .supported-apps-title {
+            font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 12px; display: block;
+        }
+        .apps-row {
+            display: flex; justify-content: center; gap: 15px; align-items: center;
+        }
+        .app-icon {
+            width: 45px; height: 45px; border-radius: 12px; background: white; border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            font-size: 0.7rem; font-weight: 800; color: white;
+        }
+        /* Styling realistic app colors */
+        .gpay { background: #ffffff; border: 1px solid #e2e8f0; color: #5f6368;}
+        .phonepe { background: #5f259f; border-color: #5f259f;}
+        .paytm { background: #002970; border-color: #002970;}
+        .bhim { background: #ff7d00; border-color: #ff7d00;}
+
+        /* --- UPI ID Display & Copy Button --- */
+        .upi-container {
+            display: flex; flex-direction: column; align-items: flex-start;
+            background: #f8fafc; padding: 12px 16px; border-radius: 12px;
+            border: 1px solid var(--border); margin-bottom: 2rem;
+        }
+        .upi-label { font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: 700; margin-bottom: 4px; }
+        .upi-row {
+            display: flex; justify-content: space-between; align-items: center; width: 100%;
+        }
+        .upi-id-text { font-size: 1.05rem; font-weight: 600; color: #1e293b; }
+        
+        .copy-btn {
+            background: white; border: 1px solid var(--border); border-radius: 8px;
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: #64748b; transition: all 0.2s;
+        }
+        .copy-btn:hover { background: #f1f5f9; color: var(--primary); border-color: #cbd5e1; }
+        .copy-btn.copied { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+
+        .pay-btn {
+            width: 100%; background: var(--success); color: white; border: none; padding: 1.1rem;
+            border-radius: 12px; font-size: 1.05rem; font-weight: 700; display: flex;
+            align-items: center; justify-content: center; gap: 8px; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+        }
+        .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 20px -5px rgba(16, 185, 129, 0.4); }
+
+        .back-link {
+            display: inline-block; margin-top: 1.5rem; color: var(--text-sub); text-decoration: none;
+            font-size: 0.9rem; font-weight: 600; transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-wrapper">
+        <div class="brand-header">
+            <img src="{{ url_for('static', filename='images/VaahanSetu-Copy.png') }}" alt="VaahanSetu Logo">
+        </div>
+
+        <div class="card">
+            <div class="card-banner">
+                <div class="amount-label" style="color: #94a3b8; margin-bottom: 5px;">Paying Driver</div>
+                <div class="amount-display">₹ {{ "{:,.2f}".format(trip.total_fare) }}</div>
+            </div>
+
+            <div class="card-body">
+                
+                <div class="qr-container">
+                    <div class="qr-box">
+                        {% if trip.upi_qr_url %}
+                            <div class="scan-line"></div>
+                            <img src="{{ trip.upi_qr_url }}" alt="Driver UPI QR Code">
+                        {% else %}
+                            <div style="width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.9rem; background: #f1f5f9; border-radius: 8px;">
+                                No QR Provided
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="supported-apps">
+                    <span class="supported-apps-title">Scan with any UPI App</span>
+                    <div class="apps-row">
+                        <div class="app-icon gpay">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0001 4.7002C13.8801 4.7002 15.5801 5.3702 16.9001 6.6402L19.4601 4.0802C17.5201 2.2702 14.9301 1.2502 12.0001 1.2502C7.3601 1.2502 3.3901 4.1902 1.5301 8.2802L4.5401 10.6202C5.2601 6.3602 8.9501 4.7002 12.0001 4.7002Z" fill="#EA4335"/><path d="M23.5001 12.2502C23.5001 11.4102 23.4201 10.6002 23.2801 9.8202H12.0001V14.4102H18.4501C18.1701 15.8902 17.3301 17.1502 16.0801 17.9902L19.0901 20.3302C20.8401 18.7102 21.9001 16.2902 22.8401 13.5602C23.2701 12.6302 23.5001 13.4402 23.5001 12.2502Z" fill="#4285F4"/><path d="M12.0001 22.7502C15.2401 22.7502 17.9501 21.6802 19.9501 19.8502L16.0801 17.9902C15.0001 18.7202 13.6201 19.1602 12.0001 19.1602C8.9501 19.1602 6.3601 17.1602 5.4401 14.4102L2.4301 16.7502C4.2901 20.8402 8.2501 22.7502 12.0001 22.7502Z" fill="#34A853"/><path d="M5.4401 14.4102C5.2001 13.6902 5.0701 12.9402 5.0701 12.1602C5.0701 11.3802 5.2001 10.6302 5.4401 9.9102L2.4301 7.5702C1.6901 9.0602 1.2501 10.7602 1.2501 12.5502C1.2501 14.3402 1.6901 16.0402 2.4301 17.5302L5.4401 14.4102Z" fill="#FBBC05"/></svg>
+                        </div>
+                        <div class="app-icon phonepe">पे</div>
+                        <div class="app-icon paytm">Pay</div>
+                        <div class="app-icon bhim" style="background: white; border-color: #e2e8f0; color: #ff7d00;">UPI</div>
+                    </div>
+                </div>
+
+                <div class="upi-container">
+                    <span class="upi-label">Or Pay via UPI ID</span>
+                    <div class="upi-row">
+                        <span class="upi-id-text" id="upiText">{{ trip.upi_id if trip.upi_id else 'Not Available' }}</span>
+                        
+                        {% if trip.upi_id %}
+                        <button class="copy-btn" id="copyBtn" onclick="copyUPI()" title="Copy UPI ID">
+                            <span class="material-symbols-rounded" style="font-size: 20px;">content_copy</span>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <form action="{{ url_for('confirm_upi_payment', trip_id=trip.id) }}" method="POST">
+                    <button type="submit" class="pay-btn">
+                        <span class="material-symbols-rounded">check_circle</span>
+                        I have completed the payment
+                    </button>
+                </form>
+
+                <a href="{{ url_for('pay_now', trip_id=trip.id) }}" class="back-link">← Choose another payment method</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyUPI() {
+            const upiText = document.getElementById("upiText").innerText;
+            const copyBtn = document.getElementById("copyBtn");
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(upiText).then(() => {
+                // Change icon to tick and green background
+                copyBtn.classList.add("copied");
+                copyBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size: 20px;">check</span>';
+                
+                // Revert back after 2 seconds
+                setTimeout(() => {
+                    copyBtn.classList.remove("copied");
+                    copyBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size: 20px;">content_copy</span>';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert("Failed to copy UPI ID.");
+            });
+        }
+    </script>
+
+</body>
+</html>
