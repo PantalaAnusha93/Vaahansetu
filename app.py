@@ -52,7 +52,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # MySQL Database Configuration
 db_config = {
     'host': "vahansetu-server.mysql.database.azure.com",
-    'user': "uhlqbffcoz",
+    'user': "uhlqbffcoz@vahansetu-server",
     'password': "Anusha@123",
     'database': "vahansetu",
     'port': 3306,
