@@ -53,8 +53,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db_config = {
     'host': "vaahansetu-server.mysql.database.azure.com",
     'user': "ruxnlbvker",
-    'password': "Rohith1202bn*",
-    'database': "vaahansetu",
+    'password': "Anusha@123",
+    'database': "vahansetu",
     'port': 3306,
     'ssl_ca': "MysqlflexGlobalRootCA.crt.pem"
 }
