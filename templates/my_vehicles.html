@@ -833,9 +833,9 @@
             <div class="vehicles-grid">
               {% for vehicle in verified_vehicles %}
               <div class="vehicle-card">
-                <div
+               <div
                   class="vehicle-image"
-                  style="background-image: url('{{ url_for('static', filename=vehicle.vehicle_photo_path.replace('static/', '')) if vehicle.vehicle_photo_path else url_for('static', filename='images/default-vehicle.png') }}');"
+                  style="background-image: url('{{ vehicle.photo_url or url_for('static', filename='images/default-vehicle.png') }}');"
                 >
                   <span class="status-badge status-{{ vehicle.status }}"
                     >{{ vehicle.status }}</span
@@ -893,7 +893,7 @@
               <div class="vehicle-card">
                 <div
                   class="vehicle-image"
-                  style="background-image: url('{{ url_for('static', filename=vehicle.vehicle_photo_path.replace('static/', '')) if vehicle.vehicle_photo_path else url_for('static', filename='images/default-vehicle.png') }}');"
+                  style="background-image: url('{{ vehicle.photo_url or url_for('static', filename='images/default-vehicle.png') }}');"
                 >
                   <span class="status-badge status-{{ vehicle.status }}"
                     >{{ vehicle.status }}</span
@@ -943,9 +943,9 @@
             <div class="vehicles-grid">
               {% for vehicle in rejected_vehicles %}
               <div class="vehicle-card">
-                <div
+               <div
                   class="vehicle-image"
-                  style="background-image: url('{{ url_for('static', filename=vehicle.vehicle_photo_path.replace('static/', '')) if vehicle.vehicle_photo_path else url_for('static', filename='images/default-vehicle.png') }}');"
+                  style="background-image: url('{{ vehicle.photo_url or url_for('static', filename='images/default-vehicle.png') }}');"
                 >
                   <span class="status-badge status-{{ vehicle.status }}"
                     >{{ vehicle.status }}</span
