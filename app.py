@@ -31,8 +31,8 @@ app.config['SECRET_KEY'] = '1234'
 
 
 # =============== RAZORPAY CONFIG ===============
-RAZORPAY_KEY_ID = "rzp_test_SJWEhYpMVsNnCf"
-RAZORPAY_KEY_SECRET = "90A4zlkVY9cbr4dhunZpljAH"
+RAZORPAY_KEY_ID = ""
+RAZORPAY_KEY_SECRET = ""
 # ==============================================
 
 razorpay_client = razorpay.Client(
@@ -40,8 +40,8 @@ razorpay_client = razorpay.Client(
 )
 
 # --- NEW: Email Configuration for OTP (UPDATE THESE) ---
-EMAIL_SENDER = 'og.capstone@gmail.com' 
-EMAIL_PASSWORD = 'ddvv xrme zvnj qyma' # Use an App Password if using Gmail
+EMAIL_SENDER = '' 
+EMAIL_PASSWORD = '' # Use an App Password if using Gmail
 EMAIL_SMTP_SERVER = 'smtp.gmail.com' # Change if not using Gmail
 EMAIL_SMTP_PORT = 587 
 
@@ -51,9 +51,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf'}
 
 # MySQL Database Configuration
 db_config = {
-    'host': "vahansetu-server.mysql.database.azure.com",
-    'user': "uhlqbffcoz",
-    'password': "Anusha@123",
+    'host': "",
+    'user': "",
+    'password': "",
     'database': "vahansetu",
     'port': 3306,
     'ssl_disabled': False
