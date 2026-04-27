@@ -1,4 +1,4 @@
-# 🚚 VaahanSetu: A Real-Time Smart Booking Platform.
+# 🚚 VaahanSetu: A Real-Time Smart Booking Platform
 
 Welcome to the official repository for **VaahanSetu**, an integrated web-based logistics management system designed to streamline transportation services by connecting customers, drivers, and administrators on a single, seamless digital platform. 
 
